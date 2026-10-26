@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROSE & BLOOM | Artisanal Café & Botanical Bakery</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rosebloom: {
+                            50: '#FFF0F3',   /* Soft pastel pink light background */
+                            100: '#FFCCD5',  /* Soft muted pink border/surface */
+                            200: '#FFB3C1',  /* Pastel blush pink */
+                            300: '#FF8FA3',  /* Rose accent */
+                            400: '#FF758F',  /* Vibrant rose gold/pink */
+                            500: '#FF4D6D',  /* Deep rose */
+                            600: '#C9184A',  /* Rich magenta red */
+                            700: '#A4133C',  /* Deep berry */
+                            800: '#800F2F',  /* Dark burgundy */
+                            900: '#590D22',  /* Darkest velvet berry text */
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF0F3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFB3C1;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF758F;
+        }
+
+        .glass-nav {
+            background: rgba(255, 240, 243, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 179, 193, 0.4);
+        }
+
+        .pulse-open {
+            box-shadow: 0 0 0 0 rgba(201, 24, 74, 0.4);
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(201, 24, 74, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 8px rgba(201, 24, 74, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(201, 24, 74, 0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-rosebloom-50 text-rosebloom-900 font-sans antialiased selection:bg-rosebloom-400 selection:text-white min-h-screen relative overflow-x-hidden">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-nav border-b border-rosebloom-200/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- LOGO -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-rosebloom-400 to-rosebloom-600 p-[1px] flex items-center justify-center shadow-md">
+                    <div class="w-full h-full bg-white rounded-full flex items-center justify-center text-rosebloom-600 group-hover:bg-rosebloom-600 group-hover:text-white transition-all duration-300">
+                        <i data-lucide="flower-2" class="w-5 h-5"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-2xl font-bold tracking-wider text-rosebloom-900 uppercase leading-none">Rose & Bloom</span>
+                    <span class="text-[9px] tracking-[0.25em] text-rosebloom-600 uppercase font-bold mt-1">Artisanal & Botanical</span>
+                </div>
+            </a>
+
+            <!-- DESKTOP NAV LINKS -->
+            <nav class="hidden lg:flex items-center gap-8 font-semibold text-xs uppercase tracking-widest text-rosebloom-800">
+                <a href="#home" class="hover:text-rosebloom-600 transition-colors">Home</a>
+                <a href="#menu" class="hover:text-rosebloom-600 transition-colors">Botanical Menu</a>
+                <a href="#bakery" class="hover:text-rosebloom-600 transition-colors">Pink Bakery</a>
+                <a href="#story" class="hover:text-rosebloom-600 transition-colors">Our Garden</a>
+                <a href="#reviews" class="hover:text-rosebloom-600 transition-colors">Reviews</a>
+                <a href="#location" class="hover:text-rosebloom-600 transition-colors">Location</a>
+                <a href="#reservation" class="hover:text-rosebloom-600 transition-colors">Reservations</a>
+            </nav>
+
+            <!-- ACTION BUTTONS & CART -->
+            <div class="flex items-center gap-4">
+                <!-- Status Badge -->
+                <div id="live-status-pill" class="hidden sm:flex items-center gap-2 px-3.5 py-1 rounded-full bg-rosebloom-200/50 border border-rosebloom-300 text-rosebloom-800 text-xs font-bold">
+                    <span class="w-2 h-2 rounded-full bg-rosebloom-600 pulse-open"></span>
+                    <span id="status-text">Open Today</span>
+                </div>
+
+                <!-- Cart Button -->
+                <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full bg-white hover:bg-rosebloom-100 text-rosebloom-700 border border-rosebloom-200 transition-all flex items-center justify-center shadow-sm group">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    <span id="cart-badge-count" class="absolute -top-1 -right-1 bg-rosebloom-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-md hidden">0</span>
+                </button>
+
+                <!-- Book Table CTA -->
+                <a href="#reservation" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-rosebloom-400 via-rosebloom-500 to-rosebloom-600 hover:from-rosebloom-600 hover:to-rosebloom-400 text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-rosebloom-400/40">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Reserve Garden Table</span>
+                </a>
+
+                <!-- Mobile Menu Toggle -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-rosebloom-900 hover:text-rosebloom-600 focus:outline-none">
+                    <i data-lucide="menu" id="mobile-menu-icon" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE NAV DRAWER -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white/95 border-b border-rosebloom-200 px-6 py-6 space-y-4 text-sm font-semibold uppercase tracking-widest text-rosebloom-800 shadow-xl">
+            <a href="#home" onclick="toggleMobileMenu()" class="block py-2 hover:text-rosebloom-600 border-b border-rosebloom-100">Home</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block py-2 hover:text-rosebloom-600 border-b border-rosebloom-100">Botanical Menu</a>
+            <a href="#bakery" onclick="toggleMobileMenu()" class="block py-2 hover:text-rosebloom-600 border-b border-rosebloom-100">Pink Bakery</a>
+            <a href="#story" onclick="toggleMobileMenu()" class="block py-2 hover:text-rosebloom-600 border-b border-rosebloom-100">Our Garden Story</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block py-2 hover:text-rosebloom-600 border-b border-rosebloom-100">Reviews</a>
+            <a href="#location" onclick="toggleMobileMenu()" class="block py-2 hover:text-rosebloom-600 border-b border-rosebloom-100">Location & Hours</a>
+            <a href="#reservation" onclick="toggleMobileMenu()" class="block py-2 text-rosebloom-600 font-bold">Book a Table</a>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+        <!-- Background Image with Soft Pink Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1800&auto=format&fit=crop" alt="Floral Pink Cafe Interior" class="w-full h-full object-cover opacity-25 scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-rosebloom-50 via-rosebloom-50/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-rosebloom-50/90 via-transparent to-rosebloom-50/90"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
+            <!-- Subtle Tag -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-rosebloom-300 text-rosebloom-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm">
+                <i data-lucide="flower" class="w-4 h-4 text-rosebloom-500"></i> Bloom Infused Espresso & Botanical Bakery
+            </div>
+
+            <!-- Headline -->
+            <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl font-normal tracking-tight text-rosebloom-900 leading-[1.08] mb-8">
+                Where <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-rosebloom-500 via-rosebloom-600 to-rosebloom-800">Petals & Espresso</span> Blossom Together.
+            </h1>
+
+            <p class="text-base sm:text-lg md:text-xl text-rosebloom-800/80 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+                Handcrafted rose velvet lattes, organic floral tea elixirs, and freshly baked pink pastries nestled inside our glasshouse botanical garden.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-rosebloom-400 via-rosebloom-500 to-rosebloom-600 hover:from-rosebloom-600 hover:to-rosebloom-400 text-white font-bold text-sm uppercase tracking-wider transition-all shadow-xl hover:shadow-rosebloom-300/60 flex items-center justify-center gap-2 group">
+                    <span>Explore Drinks & Bakery</span>
+                    <i data-lucide="arrow-down-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform"></i>
+                </a>
+                <a href="#reservation" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-rosebloom-100 text-rosebloom-900 border border-rosebloom-300 font-bold text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md">
+                    <i data-lucide="calendar" class="w-4 h-4 text-rosebloom-600"></i>
+                    <span>Book Garden Seating</span>
+                </a>
+            </div>
+
+            <!-- Highlights Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 pt-10 border-t border-rosebloom-200/60 text-left">
+                <div class="glass-card p-5 rounded-3xl">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-rosebloom-500 mb-3"></i>
+                    <h4 class="font-serif text-lg font-bold text-rosebloom-900">Rose Infused</h4>
+                    <p class="text-xs text-rosebloom-800/70 mt-1">Damask rose petal extracts distilled daily.</p>
+                </div>
+                <div class="glass-card p-5 rounded-3xl">
+                    <i data-lucide="cake" class="w-6 h-6 text-rosebloom-500 mb-3"></i>
+                    <h4 class="font-serif text-lg font-bold text-rosebloom-900">Pink Patisserie</h4>
+                    <p class="text-xs text-rosebloom-800/70 mt-1">Baked daily with natural raspberry blush.</p>
+                </div>
+                <div class="glass-card p-5 rounded-3xl">
+                    <i data-lucide="sun" class="w-6 h-6 text-rosebloom-500 mb-3"></i>
+                    <h4 class="font-serif text-lg font-bold text-rosebloom-900">Glasshouse Oasis</h4>
+                    <p class="text-xs text-rosebloom-800/70 mt-1">Surrounded by exotic blooms and orchids.</p>
+                </div>
+                <div class="glass-card p-5 rounded-3xl">
+                    <i data-lucide="heart" class="w-6 h-6 text-rosebloom-500 mb-3"></i>
+                    <h4 class="font-serif text-lg font-bold text-rosebloom-900">100% Organic</h4>
+                    <p class="text-xs text-rosebloom-800/70 mt-1">Ethical beans & pesticide-free floral teas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. INTERACTIVE MENU EXPLORER SECTION -->
+    <section id="menu" class="py-24 bg-rosebloom-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-rosebloom-600 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+                        <span class="w-6 h-[2px] bg-rosebloom-500"></span> Handcrafted Selection
+                    </span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-normal text-rosebloom-900 mt-2">Botanical Menu Explorer</h2>
+                </div>
+                <p class="text-rosebloom-800/80 text-sm max-w-md mt-4 md:mt-0 font-light">
+                    Select your favorite floral drinks or savory brunch delicacies. Customize milk options, temperature, and sweetness levels!
+                </p>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-4 mb-10 no-scrollbar" id="menu-category-tabs">
+                <button onclick="filterMenuCategory('all')" class="category-tab active px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold transition-all bg-rosebloom-600 text-white shadow-md">All Delights</button>
+                <button onclick="filterMenuCategory('espresso')" class="category-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold transition-all bg-white text-rosebloom-800 hover:text-rosebloom-600 border border-rosebloom-200">Espresso & Rose Lattes</button>
+                <button onclick="filterMenuCategory('iced')" class="category-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold transition-all bg-white text-rosebloom-800 hover:text-rosebloom-600 border border-rosebloom-200">Iced & Refreshers</button>
+                <button onclick="filterMenuCategory('teas')" class="category-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold transition-all bg-white text-rosebloom-800 hover:text-rosebloom-600 border border-rosebloom-200">Floral Teas</button>
+                <button onclick="filterMenuCategory('pastries')" class="category-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold transition-all bg-white text-rosebloom-800 hover:text-rosebloom-600 border border-rosebloom-200">Pink Pastries & Sweets</button>
+                <button onclick="filterMenuCategory('brunch')" class="category-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold transition-all bg-white text-rosebloom-800 hover:text-rosebloom-600 border border-rosebloom-200">Botanical Brunch</button>
+            </div>
+
+            <!-- Menu Items Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="menu-items-grid">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PINK BAKERY & BOTANICAL SWEETS HIGHLIGHT -->
+    <section id="bakery" class="py-24 bg-white border-y border-rosebloom-200/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-rosebloom-600 font-bold text-xs uppercase tracking-widest">Baked Fresh Every Morning</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-normal text-rosebloom-900 mt-2">The Pink Patisserie Collection</h2>
+                <p class="text-rosebloom-800/80 text-sm mt-3 font-light">Laminated sourdough, ruby chocolate glazes, and organic rosewater essences handcrafted by our master pastry chefs.</p>
+            </div>
+
+            <!-- Bakery Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="bakery-shop-grid">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. OUR STORY & BOTANICAL GARDEN -->
+    <section id="story" class="py-24 bg-rosebloom-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="relative">
+                    <div class="rounded-3xl overflow-hidden border border-rosebloom-200 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=1000&auto=format&fit=crop" alt="Pink Rose Floral Cafe Sanctuary" class="w-full h-[460px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 glass-card p-6 rounded-3xl hidden sm:block max-w-xs border border-rosebloom-300 shadow-xl">
+                        <div class="flex items-center gap-3 mb-2">
+                            <i data-lucide="flower-2" class="w-6 h-6 text-rosebloom-600"></i>
+                            <span class="font-serif font-bold text-rosebloom-900">Ethical Botanical Sourcing</span>
+                        </div>
+                        <p class="text-xs text-rosebloom-800/80">Every flower petal used in our tea brews is organic and food-grade certified.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <span class="text-rosebloom-600 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+                        <span class="w-6 h-[2px] bg-rosebloom-500"></span> Our Sanctuary Story
+                    </span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-normal text-rosebloom-900 leading-tight">
+                        A blooming glasshouse dedicated to coffee & confectionery artistry.
+                    </h2>
+                    <p class="text-rosebloom-800/80 text-sm leading-relaxed font-light">
+                        Rose & Bloom was founded on a simple dream: combining the delicate aromas of high-altitude Ethiopian single-origin coffees with the soothing essence of botanical florals.
+                    </p>
+                    <p class="text-rosebloom-800/80 text-sm leading-relaxed font-light">
+                        Step inside our light-filled greenhouse sanctuary surrounded by climbing roses, exotic monstera leaves, and soft pink velvet seating.
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-rosebloom-200">
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-rosebloom-600 block">100%</span>
+                            <span class="text-[10px] uppercase text-rosebloom-800 font-bold tracking-wider">Natural Pigments</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-rosebloom-600 block">24h</span>
+                            <span class="text-[10px] uppercase text-rosebloom-800 font-bold tracking-wider">Cold Rose Steep</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-rosebloom-600 block">4.9★</span>
+                            <span class="text-[10px] uppercase text-rosebloom-800 font-bold tracking-wider">Customer Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. REVIEWS & INSTAGRAM FEED -->
+    <section id="reviews" class="py-20 bg-white border-y border-rosebloom-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-rosebloom-600 font-bold text-xs uppercase tracking-widest">Love Notes</span>
+                <h2 class="font-serif text-4xl font-normal text-rosebloom-900 mt-2">Loved by Floral Coffee Enthusiasts</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <div class="glass-card p-6 rounded-3xl border border-rosebloom-200 shadow-sm">
+                    <div class="flex text-rosebloom-500 gap-1 mb-4 text-xs">
+                        ★★★★★
+                    </div>
+                    <p class="text-xs text-rosebloom-800/80 italic leading-relaxed mb-6">"The Rose Gold Latte paired with the Ruby Velvet Croissant is absolute perfection. The prettiest café in the whole city!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-rosebloom-300 text-rosebloom-900 font-serif font-bold flex items-center justify-center text-xs">ES</div>
+                        <div>
+                            <h4 class="font-semibold text-xs text-rosebloom-900">Emma Stone</h4>
+                            <span class="text-[10px] text-rosebloom-600 font-medium">Food & Lifestyle Blogger</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl border border-rosebloom-200 shadow-sm">
+                    <div class="flex text-rosebloom-500 gap-1 mb-4 text-xs">
+                        ★★★★★
+                    </div>
+                    <p class="text-xs text-rosebloom-800/80 italic leading-relaxed mb-6">"Reserved a garden table for my birthday brunch. The botanical surroundings, pink matcha, and service were unforgettable."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-rosebloom-500 text-white font-serif font-bold flex items-center justify-center text-xs">SL</div>
+                        <div>
+                            <h4 class="font-semibold text-xs text-rosebloom-900">Sophia Laurent</h4>
+                            <span class="text-[10px] text-rosebloom-600 font-medium">Verified Guest</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl border border-rosebloom-200 shadow-sm">
+                    <div class="flex text-rosebloom-500 gap-1 mb-4 text-xs">
+                        ★★★★★
+                    </div>
+                    <p class="text-xs text-rosebloom-800/80 italic leading-relaxed mb-6">"Ordered takeout via WhatsApp for a morning meeting. Everything arrived warm, beautifully packaged with fresh rose petals!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-rosebloom-200 text-rosebloom-800 font-serif font-bold flex items-center justify-center text-xs">MA</div>
+                        <div>
+                            <h4 class="font-semibold text-xs text-rosebloom-900">Mia Anderson</h4>
+                            <span class="text-[10px] text-rosebloom-600 font-medium">Regular Visitor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram Grid -->
+            <div class="text-center mb-6">
+                <span class="text-xs text-rosebloom-800 uppercase tracking-widest font-bold">Follow Our Bloom Story @RoseAndBloomCafe</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="relative group rounded-2xl overflow-hidden aspect-square shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-rosebloom-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                    </div>
+                </div>
+                <div class="relative group rounded-2xl overflow-hidden aspect-square shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-rosebloom-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                    </div>
+                </div>
+                <div class="relative group rounded-2xl overflow-hidden aspect-square shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-rosebloom-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                    </div>
+                </div>
+                <div class="relative group rounded-2xl overflow-hidden aspect-square shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-rosebloom-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. TABLE RESERVATIONS SECTION -->
+    <section id="reservation" class="py-24 bg-rosebloom-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-rosebloom-600 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+                        <span class="w-6 h-[2px] bg-rosebloom-500"></span> Table Booking
+                    </span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-normal text-rosebloom-900">Reserve Your Sanctuary Table</h2>
+                    <p class="text-rosebloom-800/80 text-sm leading-relaxed font-light">
+                        Book your spot ahead in our pink botanical greenhouse. Perfect for weekend tea parties, morning coffee dates, or cozy work sessions.
+                    </p>
+
+                    <div class="p-6 rounded-3xl glass-card space-y-4 border border-rosebloom-200">
+                        <div class="flex items-center gap-3 text-sm text-rosebloom-900">
+                            <i data-lucide="flower" class="w-5 h-5 text-rosebloom-500"></i>
+                            <span>Surrounded by fresh blooms and indoor gardens</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-rosebloom-900">
+                            <i data-lucide="wifi" class="w-5 h-5 text-rosebloom-500"></i>
+                            <span>Ultra-fast Wi-Fi + Charging outlets</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-rosebloom-900">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-rosebloom-500"></i>
+                            <span>Photogenic aesthetic spots & floral backdrops</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-white p-8 rounded-3xl border border-rosebloom-200 shadow-xl">
+                    <form onsubmit="handleReservationSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-rosebloom-800 mb-2">Full Name</label>
+                                <input type="text" required placeholder="Clara Bella" class="w-full bg-rosebloom-50 border border-rosebloom-200 rounded-xl px-4 py-3 text-sm text-rosebloom-900 focus:outline-none focus:border-rosebloom-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-rosebloom-800 mb-2">Phone Number</label>
+                                <input type="tel" required placeholder="+1 (555) 432-8901" class="w-full bg-rosebloom-50 border border-rosebloom-200 rounded-xl px-4 py-3 text-sm text-rosebloom-900 focus:outline-none focus:border-rosebloom-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-rosebloom-800 mb-2">Guests</label>
+                                <div class="flex items-center bg-rosebloom-50 border border-rosebloom-200 rounded-xl p-1">
+                                    <button type="button" onclick="adjustGuestCount(-1)" class="w-10 h-9 flex items-center justify-center text-rosebloom-700 font-bold hover:bg-rosebloom-200 rounded-lg">-</button>
+                                    <span id="guest-count-display" class="flex-1 text-center font-bold text-sm text-rosebloom-900">2</span>
+                                    <button type="button" onclick="adjustGuestCount(1)" class="w-10 h-9 flex items-center justify-center text-rosebloom-700 font-bold hover:bg-rosebloom-200 rounded-lg">+</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-rosebloom-800 mb-2">Date</label>
+                                <input type="date" required class="w-full bg-rosebloom-50 border border-rosebloom-200 rounded-xl px-4 py-2.5 text-sm text-rosebloom-900 focus:outline-none focus:border-rosebloom-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-rosebloom-800 mb-2">Time Slot</label>
+                                <select class="w-full bg-rosebloom-50 border border-rosebloom-200 rounded-xl px-4 py-3 text-sm text-rosebloom-900 focus:outline-none focus:border-rosebloom-500">
+                                    <option>09:00 AM</option>
+                                    <option selected>11:00 AM</option>
+                                    <option>01:30 PM</option>
+                                    <option>03:30 PM</option>
+                                    <option>05:30 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-rosebloom-800 mb-2">Seating Area Preference</label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="seating" value="Botanical Garden" checked class="peer hidden">
+                                    <div class="p-3 text-center rounded-xl bg-rosebloom-50 border border-rosebloom-200 text-xs text-rosebloom-800 peer-checked:border-rosebloom-600 peer-checked:bg-rosebloom-600 peer-checked:text-white font-bold transition-all">
+                                        Botanical Garden
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="seating" value="Pink Velvet Lounge" class="peer hidden">
+                                    <div class="p-3 text-center rounded-xl bg-rosebloom-50 border border-rosebloom-200 text-xs text-rosebloom-800 peer-checked:border-rosebloom-600 peer-checked:bg-rosebloom-600 peer-checked:text-white font-bold transition-all">
+                                        Velvet Lounge
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="seating" value="Sunlit Terrace" class="peer hidden">
+                                    <div class="p-3 text-center rounded-xl bg-rosebloom-50 border border-rosebloom-200 text-xs text-rosebloom-800 peer-checked:border-rosebloom-600 peer-checked:bg-rosebloom-600 peer-checked:text-white font-bold transition-all">
+                                        Sunlit Terrace
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-rosebloom-400 via-rosebloom-500 to-rosebloom-600 hover:from-rosebloom-600 hover:to-rosebloom-400 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg hover:shadow-rosebloom-300">
+                            Confirm Rose & Bloom Reservation
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. LOCATION & OPENING HOURS WIDGET -->
+    <section id="location" class="py-24 bg-white border-t border-rosebloom-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-rosebloom-600 font-bold text-xs uppercase tracking-widest">Visit Our Café</span>
+                        <h2 class="font-serif text-4xl sm:text-5xl font-normal text-rosebloom-900 mt-2">Location & Opening Hours</h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-2xl bg-rosebloom-100 text-rosebloom-600 border border-rosebloom-200">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif font-bold text-lg text-rosebloom-900">Flagship Glasshouse</h4>
+                                <p class="text-xs text-rosebloom-800/80 mt-1">428 Blossom Boulevard, Botanical Quarter, New York, NY 10014</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-2xl bg-rosebloom-100 text-rosebloom-600 border border-rosebloom-200">
+                                <i data-lucide="clock" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif font-bold text-lg text-rosebloom-900">Café Hours</h4>
+                                <p class="text-xs text-rosebloom-800/80 mt-1">Monday – Friday: 07:30 AM – 07:30 PM</p>
+                                <p class="text-xs text-rosebloom-800/80">Saturday – Sunday: 08:00 AM – 08:30 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-2xl bg-rosebloom-100 text-rosebloom-600 border border-rosebloom-200">
+                                <i data-lucide="mail" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif font-bold text-lg text-rosebloom-900">Contact Us</h4>
+                                <p class="text-xs text-rosebloom-800/80 mt-1">bloom@rosebloomcafe.com / +1 (212) 555-ROSE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Map Visual Box -->
+                <div class="h-80 w-full rounded-3xl bg-rosebloom-100 border border-rosebloom-200 overflow-hidden relative flex items-center justify-center p-6 text-center shadow-inner">
+                    <div class="absolute inset-0 opacity-40">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
+                    </div>
+                    <div class="relative z-10 glass-card p-6 rounded-3xl max-w-sm border border-rosebloom-300 shadow-xl">
+                        <i data-lucide="navigation" class="w-8 h-8 text-rosebloom-600 mx-auto mb-3"></i>
+                        <h4 class="font-serif font-bold text-lg text-rosebloom-900">Botanical Garden Valet Available</h4>
+                        <p class="text-xs text-rosebloom-800/80 mt-2">Located just 1 block away from Spring St Subway Station.</p>
+                        <a href="https://maps.google.com" target="_blank" class="inline-block mt-4 text-xs font-bold text-rosebloom-600 uppercase tracking-wider hover:underline">Get Directions &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-rosebloom-900 text-rosebloom-100 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="flower-2" class="w-6 h-6 text-rosebloom-300"></i>
+                        <span class="font-serif text-2xl font-bold text-white">ROSE & BLOOM</span>
+                    </div>
+                    <p class="text-xs leading-relaxed font-light text-rosebloom-200">
+                        Artisanal rose lattes, botanical floral teas, and ruby patisserie served inside a glasshouse garden.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-sm font-bold text-white uppercase tracking-widest mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-rosebloom-200">
+                        <li><a href="#menu" class="hover:text-white transition-colors">Botanical Menu</a></li>
+                        <li><a href="#bakery" class="hover:text-white transition-colors">Pink Patisserie</a></li>
+                        <li><a href="#story" class="hover:text-white transition-colors">Our Garden Story</a></li>
+                        <li><a href="#reservation" class="hover:text-white transition-colors">Table Booking</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-sm font-bold text-white uppercase tracking-widest mb-4">Join Bloom Club</h4>
+                    <p class="text-xs mb-3 font-light text-rosebloom-200">Subscribe for 10% off your first rose tea order.</p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex gap-2">
+                        <input type="email" required placeholder="Enter your email" class="bg-rosebloom-800 border border-rosebloom-700 text-xs px-3 py-2 rounded-lg text-white placeholder-rosebloom-300/60 focus:outline-none w-full">
+                        <button type="submit" class="bg-rosebloom-400 text-rosebloom-900 px-4 py-2 rounded-lg text-xs font-bold hover:bg-rosebloom-300 transition-colors">Join</button>
+                    </form>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-sm font-bold text-white uppercase tracking-widest mb-4">Social Media</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-full bg-rosebloom-800 border border-rosebloom-700 flex items-center justify-center text-rosebloom-200 hover:bg-rosebloom-400 hover:text-rosebloom-900 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-rosebloom-800 border border-rosebloom-700 flex items-center justify-center text-rosebloom-200 hover:bg-rosebloom-400 hover:text-rosebloom-900 transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-rosebloom-800 border border-rosebloom-700 flex items-center justify-center text-rosebloom-200 hover:bg-rosebloom-400 hover:text-rosebloom-900 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-rosebloom-800 flex flex-col sm:flex-row justify-between items-center text-[11px] gap-4 text-rosebloom-300">
+                <p>&copy; 2026 ROSE & BLOOM Café LLC. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <a href="#" class="hover:underline">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART DRAWER (SLIDE OUT) -->
+    <div id="cart-drawer-overlay" onclick="toggleCartDrawer()" class="fixed inset-0 bg-rosebloom-900/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    
+    <div id="cart-drawer-panel" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col border-l border-rosebloom-200">
+        
+        <!-- Drawer Header -->
+        <div class="p-6 bg-rosebloom-50 border-b border-rosebloom-200 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i data-lucide="shopping-bag" class="w-5 h-5 text-rosebloom-600"></i>
+                <h3 class="font-serif text-xl font-bold text-rosebloom-900">Your Bloom Cart</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="p-1 text-rosebloom-700 hover:text-rosebloom-900">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Drawer Body Items -->
+        <div id="cart-drawer-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Injected via JS -->
+        </div>
+
+        <!-- Order Options & Calculator Footer -->
+        <div class="p-6 border-t border-rosebloom-200 bg-rosebloom-50/90 space-y-4">
+            
+            <!-- Fulfillment Mode -->
+            <div>
+                <label class="block text-[10px] font-bold uppercase tracking-wider text-rosebloom-800 mb-2">Fulfillment Mode</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="setFulfillment('dine-in')" id="mode-dine-in" class="py-2 text-xs font-bold rounded-xl border border-rosebloom-600 bg-rosebloom-600 text-white transition-all">Dine-In</button>
+                    <button onclick="setFulfillment('pickup')" id="mode-pickup" class="py-2 text-xs font-bold rounded-xl border border-rosebloom-200 bg-white text-rosebloom-800 hover:bg-rosebloom-100 transition-all">Pickup</button>
+                    <button onclick="setFulfillment('delivery')" id="mode-delivery" class="py-2 text-xs font-bold rounded-xl border border-rosebloom-200 bg-white text-rosebloom-800 hover:bg-rosebloom-100 transition-all">Delivery</button>
+                </div>
+            </div>
+
+            <!-- Tip Selector -->
+            <div>
+                <label class="block text-[10px] font-bold uppercase tracking-wider text-rosebloom-800 mb-2">Barista Tip</label>
+                <div class="grid grid-cols-4 gap-2">
+                    <button onclick="setTip(0)" class="tip-btn py-1.5 text-xs rounded-lg bg-white border border-rosebloom-200 text-rosebloom-800 font-bold">0%</button>
+                    <button onclick="setTip(10)" class="tip-btn py-1.5 text-xs rounded-lg bg-white border border-rosebloom-200 text-rosebloom-800 font-bold">10%</button>
+                    <button onclick="setTip(15)" class="tip-btn active py-1.5 text-xs rounded-lg border border-rosebloom-600 bg-rosebloom-200 text-rosebloom-900 font-bold">15%</button>
+                    <button onclick="setTip(20)" class="tip-btn py-1.5 text-xs rounded-lg bg-white border border-rosebloom-200 text-rosebloom-800 font-bold">20%</button>
+                </div>
+            </div>
+
+            <!-- Total Calculation Summary -->
+            <div class="space-y-1.5 pt-2 text-xs border-t border-rosebloom-200">
+                <div class="flex justify-between text-rosebloom-800">
+                    <span>Subtotal:</span>
+                    <span id="calc-subtotal">$0.00</span>
+                </div>
+                <div class="flex justify-between text-rosebloom-800">
+                    <span>Tax (8.875%):</span>
+                    <span id="calc-tax">$0.00</span>
+                </div>
+                <div class="flex justify-between text-rosebloom-800">
+                    <span>Barista Tip:</span>
+                    <span id="calc-tip">$0.00</span>
+                </div>
+                <div class="flex justify-between text-sm font-bold text-rosebloom-900 pt-2 border-t border-rosebloom-200">
+                    <span>Total Amount:</span>
+                    <span id="calc-total" class="font-serif text-xl text-rosebloom-600">$0.00</span>
+                </div>
+            </div>
+
+            <!-- WhatsApp Order Checkout -->
+            <button onclick="checkoutViaWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2 shadow-md">
+                <i data-lucide="message-square" class="w-4 h-4"></i>
+                <span>Order via WhatsApp</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- CUSTOMIZABLE ITEM MODAL -->
+    <div id="customizer-modal" class="fixed inset-0 bg-rosebloom-900/60 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white border border-rosebloom-200 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl">
+            <div class="relative h-48">
+                <img id="modal-img" src="" class="w-full h-full object-cover">
+                <button onclick="closeCustomizerModal()" class="absolute top-4 right-4 p-2 rounded-full bg-white/80 text-rosebloom-900 hover:bg-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <h3 id="modal-title" class="font-serif text-2xl font-bold text-rosebloom-900"></h3>
+                    <p id="modal-desc" class="text-xs text-rosebloom-800/80 mt-1"></p>
+                </div>
+
+                <!-- Custom Milk Choice -->
+                <div id="modal-milk-group">
+                    <label class="block text-xs uppercase font-bold text-rosebloom-800 mb-2">Select Dairy / Plant Milk</label>
+                    <select id="modal-milk-select" class="w-full bg-rosebloom-50 border border-rosebloom-200 rounded-xl px-4 py-2.5 text-xs text-rosebloom-900 focus:outline-none">
+                        <option value="Organic Whole Milk">Organic Whole Milk (Standard)</option>
+                        <option value="Oat Milk">Oat Milk (+$0.75)</option>
+                        <option value="Almond Milk">Almond Milk (+$0.85)</option>
+                        <option value="Rose-Infused Cream">Signature Rose-Infused Cream (+$1.25)</option>
+                    </select>
+                </div>
+
+                <!-- Sweetness Level -->
+                <div>
+                    <label class="block text-xs uppercase font-bold text-rosebloom-800 mb-2">Sweetness Level</label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="modal-sweet" value="0% Unsweetened" class="peer hidden">
+                            <div class="p-2 text-center rounded-xl bg-rosebloom-50 border border-rosebloom-200 text-xs text-rosebloom-800 peer-checked:bg-rosebloom-600 peer-checked:text-white font-bold">0%</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="modal-sweet" value="50% Medium" class="peer hidden">
+                            <div class="p-2 text-center rounded-xl bg-rosebloom-50 border border-rosebloom-200 text-xs text-rosebloom-800 peer-checked:bg-rosebloom-600 peer-checked:text-white font-bold">50%</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="modal-sweet" value="100% Standard" checked class="peer hidden">
+                            <div class="p-2 text-center rounded-xl bg-rosebloom-50 border border-rosebloom-200 text-xs text-rosebloom-800 peer-checked:bg-rosebloom-600 peer-checked:text-white font-bold">100%</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="modal-sweet" value="Extra Rose Syrup" class="peer hidden">
+                            <div class="p-2 text-center rounded-xl bg-rosebloom-50 border border-rosebloom-200 text-xs text-rosebloom-800 peer-checked:bg-rosebloom-600 peer-checked:text-white font-bold">Extra</div>
+                        </label>
+                    </div>
+                </div>
+
+                <button id="modal-add-btn" class="w-full py-3.5 bg-gradient-to-r from-rosebloom-400 via-rosebloom-500 to-rosebloom-600 hover:from-rosebloom-600 hover:to-rosebloom-400 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-md">
+                    Add Customized Drink to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-notify" class="fixed bottom-6 right-6 bg-rosebloom-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-rosebloom-500 transform translate-y-24 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-5 h-5 text-rosebloom-300"></i>
+        <span id="toast-notify-text" class="text-xs font-semibold">Item added successfully</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // DATA SOURCES
+        const menuProducts = [
+            {
+                id: 301,
+                name: "Rose Gold Velvet Latte",
+                category: "espresso",
+                price: 6.90,
+                notes: ["Damask Rose Syrup", "Edible Gold Dust"],
+                description: "Double ristretto espresso folded into micro-foamed rose-infused milk and topped with edible 24k gold flakes.",
+                image: "https://images.unsplash.com/photo-1534778101976-62847782c213?q=80&w=500&auto=format&fit=crop",
+                isCustomizable: true
+            },
+            {
+                id: 302,
+                name: "Pink Dragonfruit Iced Matcha",
+                category: "iced",
+                price: 7.20,
+                notes: ["Uji Ceremonial Matcha", "Organic Pitaya Cream"],
+                description: "Layered ceremonial grade green tea over coconut milk and vibrant pink dragonfruit foam.",
+                image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=500&auto=format&fit=crop",
+                isCustomizable: true
+            },
+            {
+                id: 303,
+                name: "Hibiscus & Rose Petal Tea",
+                category: "teas",
+                price: 5.80,
+                notes: ["Organic Whole Petals", "Wild Berry Honey"],
+                description: "Hand-blended Egyptian hibiscus flowers and organic pink rosebuds steeped slow for ruby clarity.",
+                image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=500&auto=format&fit=crop",
+                isCustomizable: false
+            },
+            {
+                id: 304,
+                name: "Ruby Velvet Croissant",
+                category: "pastries",
+                price: 5.90,
+                notes: ["Raspberry Ganache", "Rose Sugar Dust"],
+                description: "72-hour sourdough pink laminated croissant filled with wild raspberry ruby chocolate cream.",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=500&auto=format&fit=crop",
+                isCustomizable: false
+            },
+            {
+                id: 305,
+                name: "Pink Beetroot & Cardamom Latte",
+                category: "espresso",
+                price: 6.40,
+                notes: ["Caffeine-Free Option", "Warm Spices"],
+                description: "Organic roasted beetroot extract infused with cardamom, steamed oat milk, and a espresso shot.",
+                image: "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?q=80&w=500&auto=format&fit=crop",
+                isCustomizable: true
+            },
+            {
+                id: 306,
+                name: "Avocado & Edible Flowers Toast",
+                category: "brunch",
+                price: 14.50,
+                notes: ["Pink Sourdough Brioche", "Poached Egg"],
+                description: "Thick slice of toasted pink sourdough, whipped Haas avocado, organic violas, and chili lemon oil.",
+                image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=500&auto=format&fit=crop",
+                isCustomizable: false
+            }
+        ];
+
+        const bakeryItems = [
+            {
+                id: 401,
+                title: "Rose & Raspberry Macaron Box",
+                tag: "Bestseller",
+                notes: "Rosewater Buttercream & Raspberry Jam",
+                price: 18.00,
+                image: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 402,
+                title: "Pink Strawberry Chiffon Cake Slice",
+                tag: "Daily Fresh",
+                notes: "Fresh Strawberries & Pink Vanilla Cream",
+                price: 7.50,
+                image: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 403,
+                title: "Ruby Pistachio Eclair",
+                tag: "Chef Special",
+                notes: "Bronte Pistachio & Ruby Chocolate Glaze",
+                price: 6.80,
+                image: "https://images.unsplash.com/photo-1603532648955-039310d9ed75?q=80&w=500&auto=format&fit=crop"
+            }
+        ];
+
+        // GLOBAL APP STATE
+        let cartItems = [];
+        let currentFulfillment = 'dine-in';
+        let currentTipPercent = 15;
+        let currentGuestCount = 2;
+        let activeCustomizerItem = null;
+
+        // RENDER MENU EXPLORER
+        function renderMenuItems(items) {
+            const container = document.getElementById('menu-items-grid');
+            container.innerHTML = '';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-3xl overflow-hidden flex flex-col justify-between hover:border-rosebloom-400 transition-all duration-300 group shadow-sm";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 font-serif font-bold text-sm bg-white/90 backdrop-blur-md text-rosebloom-600 px-3.5 py-1 rounded-full border border-rosebloom-200 shadow-sm">
+                                $${item.price.toFixed(2)}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-1.5 mb-3">
+                                ${item.notes.map(note => `<span class="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-rosebloom-100 text-rosebloom-800 border border-rosebloom-200">${note}</span>`).join('')}
+                            </div>
+                            <h3 class="font-serif text-2xl font-bold text-rosebloom-900 mb-2">${item.name}</h3>
+                            <p class="text-xs text-rosebloom-800/80 leading-relaxed font-light mb-4">${item.description}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0">
+                        ${item.isCustomizable ? `
+                            <button onclick="openCustomizerModal(${item.id})" class="w-full py-3 rounded-xl bg-rosebloom-100 hover:bg-rosebloom-500 text-rosebloom-900 hover:text-white font-bold text-xs uppercase tracking-widest transition-all border border-rosebloom-200 flex items-center justify-center gap-2">
+                                <i data-lucide="sliders" class="w-4 h-4"></i> Customize & Add
+                            </button>
+                        ` : `
+                            <button onclick="addStandardItemToCart(${item.id})" class="w-full py-3 rounded-xl bg-rosebloom-100 hover:bg-rosebloom-500 text-rosebloom-900 hover:text-white font-bold text-xs uppercase tracking-widest transition-all border border-rosebloom-200 flex items-center justify-center gap-2">
+                                <i data-lucide="plus" class="w-4 h-4"></i> Quick Add
+                            </button>
+                        `}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // RENDER BAKERY ITEMS
+        function renderBakeryShop() {
+            const container = document.getElementById('bakery-shop-grid');
+            container.innerHTML = '';
+
+            bakeryItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "glass-card p-6 rounded-3xl flex flex-col justify-between border border-rosebloom-200 hover:border-rosebloom-400 transition-all shadow-sm";
+                card.innerHTML = `
+                    <div>
+                        <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
+                            <img src="${item.image}" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-rosebloom-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">${item.tag}</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-rosebloom-900">${item.title}</h3>
+                        <p class="text-xs text-rosebloom-600 font-semibold mt-1 mb-4">${item.notes}</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs text-rosebloom-800 font-semibold">Fresh Bake</span>
+                            <span class="font-serif text-2xl font-bold text-rosebloom-900">$${item.price.toFixed(2)}</span>
+                        </div>
+                        <button onclick="addBakeryToCart(${item.id})" class="w-full py-3 rounded-xl bg-gradient-to-r from-rosebloom-400 via-rosebloom-500 to-rosebloom-600 hover:from-rosebloom-600 hover:to-rosebloom-400 text-white font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-md">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i> Add Sweet to Bag
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // FILTER MENU CATEGORY
+        function filterMenuCategory(category) {
+            const tabs = document.querySelectorAll('.category-tab');
+            tabs.forEach(t => {
+                t.className = "category-tab px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold transition-all bg-white text-rosebloom-800 hover:text-rosebloom-600 border border-rosebloom-200";
+            });
+            event.currentTarget.className = "category-tab active px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold transition-all bg-rosebloom-600 text-white shadow-md";
+
+            if (category === 'all') {
+                renderMenuItems(menuProducts);
+            } else {
+                const filtered = menuProducts.filter(p => p.category === category);
+                renderMenuItems(filtered);
+            }
+        }
+
+        // CART LOGIC
+        function addStandardItemToCart(itemId) {
+            const item = menuProducts.find(p => p.id === itemId);
+            cartItems.push({
+                cartId: Date.now(),
+                name: item.name,
+                price: item.price,
+                details: "Standard Brew",
+                quantity: 1
+            });
+            updateCartDrawerUI();
+            triggerToastNotification(`${item.name} added to cart!`);
+        }
+
+        function addBakeryToCart(bakeryId) {
+            const item = bakeryItems.find(b => b.id === bakeryId);
+            cartItems.push({
+                cartId: Date.now(),
+                name: item.title,
+                price: item.price,
+                details: "Pink Patisserie",
+                quantity: 1
+            });
+            updateCartDrawerUI();
+            triggerToastNotification(`${item.title} added to cart!`);
+        }
+
+        function openCustomizerModal(itemId) {
+            activeCustomizerItem = menuProducts.find(p => p.id === itemId);
+            const modal = document.getElementById('customizer-modal');
+            document.getElementById('modal-img').src = activeCustomizerItem.image;
+            document.getElementById('modal-title').innerText = activeCustomizerItem.name;
+            document.getElementById('modal-desc').innerText = activeCustomizerItem.description;
+
+            document.getElementById('modal-add-btn').onclick = function() {
+                const milkSelect = document.getElementById('modal-milk-select');
+                const selectedMilk = milkSelect.value;
+                const sweetOption = document.querySelector('input[name="modal-sweet"]:checked').value;
+
+                let extra = 0;
+                if (selectedMilk.includes('Oat')) extra = 0.75;
+                if (selectedMilk.includes('Almond')) extra = 0.85;
+                if (selectedMilk.includes('Rose-Infused')) extra = 1.25;
+
+                cartItems.push({
+                    cartId: Date.now(),
+                    name: activeCustomizerItem.name,
+                    price: activeCustomizerItem.price + extra,
+                    details: `${selectedMilk} | ${sweetOption}`,
+                    quantity: 1
+                });
+
+                closeCustomizerModal();
+                updateCartDrawerUI();
+                triggerToastNotification(`Customized ${activeCustomizerItem.name} added!`);
+            };
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeCustomizerModal() {
+            const modal = document.getElementById('customizer-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function updateCartDrawerUI() {
+            const container = document.getElementById('cart-drawer-items');
+            const badgeCount = document.getElementById('cart-badge-count');
+            container.innerHTML = '';
+
+            let subtotal = 0;
+            let count = 0;
+
+            if (cartItems.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-rosebloom-800/60">
+                        <i data-lucide="flower-2" class="w-12 h-12 mx-auto mb-3 opacity-30"></i>
+                        <p class="text-xs font-semibold">Your bloom cart is empty.</p>
+                    </div>
+                `;
+            } else {
+                cartItems.forEach((item, index) => {
+                    subtotal += item.price * item.quantity;
+                    count += item.quantity;
+
+                    const row = document.createElement('div');
+                    row.className = "flex justify-between items-center p-3 rounded-2xl bg-rosebloom-50 border border-rosebloom-200";
+                    row.innerHTML = `
+                        <div>
+                            <h4 class="font-serif font-bold text-sm text-rosebloom-900">${item.name}</h4>
+                            <p class="text-[10px] text-rosebloom-600 font-bold">${item.details}</p>
+                            <span class="text-xs font-bold text-rosebloom-900 mt-1 block">$${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="changeCartQty(${index}, -1)" class="w-6 h-6 rounded-lg bg-white text-rosebloom-900 font-bold text-xs flex items-center justify-center border border-rosebloom-200">-</button>
+                            <span class="text-xs font-bold text-rosebloom-900">${item.quantity}</span>
+                            <button onclick="changeCartQty(${index}, 1)" class="w-6 h-6 rounded-lg bg-white text-rosebloom-900 font-bold text-xs flex items-center justify-center border border-rosebloom-200">+</button>
+                        </div>
+                    `;
+                    container.appendChild(row);
+                });
+            }
+
+            // Calculations
+            const tax = subtotal * 0.08875;
+            const tip = subtotal * (currentTipPercent / 100);
+            const grandTotal = subtotal + tax + tip;
+
+            document.getElementById('calc-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('calc-tax').innerText = `$${tax.toFixed(2)}`;
+            document.getElementById('calc-tip').innerText = `$${tip.toFixed(2)}`;
+            document.getElementById('calc-total').innerText = `$${grandTotal.toFixed(2)}`;
+
+            if (count > 0) {
+                badgeCount.innerText = count;
+                badgeCount.classList.remove('hidden');
+            } else {
+                badgeCount.classList.add('hidden');
+            }
+
+            lucide.createIcons();
+        }
+
+        function changeCartQty(index, delta) {
+            cartItems[index].quantity += delta;
+            if (cartItems[index].quantity <= 0) {
+                cartItems.splice(index, 1);
+            }
+            updateCartDrawerUI();
+        }
+
+        function setFulfillment(mode) {
+            currentFulfillment = mode;
+            ['dine-in', 'pickup', 'delivery'].forEach(m => {
+                const btn = document.getElementById(`mode-${m}`);
+                if (m === mode) {
+                    btn.className = "py-2 text-xs font-bold rounded-xl border border-rosebloom-600 bg-rosebloom-600 text-white transition-all";
+                } else {
+                    btn.className = "py-2 text-xs font-bold rounded-xl border border-rosebloom-200 bg-white text-rosebloom-800 hover:bg-rosebloom-100 transition-all";
+                }
+            });
+        }
+
+        function setTip(percentage) {
+            currentTipPercent = percentage;
+            const buttons = document.querySelectorAll('.tip-btn');
+            buttons.forEach(btn => {
+                btn.className = "tip-btn py-1.5 text-xs rounded-lg bg-white border border-rosebloom-200 text-rosebloom-800 font-bold";
+            });
+            event.currentTarget.className = "tip-btn active py-1.5 text-xs rounded-lg border border-rosebloom-600 bg-rosebloom-200 text-rosebloom-900 font-bold";
+            updateCartDrawerUI();
+        }
+
+        function toggleCartDrawer() {
+            const panel = document.getElementById('cart-drawer-panel');
+            const overlay = document.getElementById('cart-drawer-overlay');
+
+            const isOpen = !panel.classList.contains('translate-x-full');
+            if (isOpen) {
+                panel.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                panel.classList.remove('translate-x-full');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function checkoutViaWhatsApp() {
+            if (cartItems.length === 0) {
+                triggerToastNotification("Your bloom cart is empty!");
+                return;
+            }
+
+            let text = `🌸 *New Order - ROSE & BLOOM CAFÉ*\n`;
+            text += `*Fulfillment:* ${currentFulfillment.toUpperCase()}\n\n`;
+            text += `*Order Items:*\n`;
+
+            let subtotal = 0;
+            cartItems.forEach(item => {
+                const itemTot = item.price * item.quantity;
+                subtotal += itemTot;
+                text += `• ${item.quantity}x ${item.name} (${item.details}) - $${itemTot.toFixed(2)}\n`;
+            });
+
+            const tax = subtotal * 0.08875;
+            const tip = subtotal * (currentTipPercent / 100);
+            const total = subtotal + tax + tip;
+
+            text += `\n*Subtotal:* $${subtotal.toFixed(2)}`;
+            text += `\n*Tax:* $${tax.toFixed(2)}`;
+            text += `\n*Barista Tip:* $${tip.toFixed(2)}`;
+            text += `\n*TOTAL AMOUNT:* $${total.toFixed(2)}\n\n`;
+            text += `Ready to bloom!`;
+
+            window.open(`https://wa.me/12125557673?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // RESERVATIONS & FORMS
+        function adjustGuestCount(delta) {
+            currentGuestCount = Math.max(1, currentGuestCount + delta);
+            document.getElementById('guest-count-display').innerText = currentGuestCount;
+        }
+
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            triggerToastNotification("Garden table reserved! SMS confirmation sent.");
+            e.target.reset();
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            triggerToastNotification("Welcome to Bloom Club! 10% coupon emailed.");
+            e.target.reset();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-nav');
+            menu.classList.toggle('hidden');
+        }
+
+        function triggerToastNotification(msg) {
+            const toast = document.getElementById('toast-notify');
+            const txt = document.getElementById('toast-notify-text');
+            txt.innerText = msg;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3200);
+        }
+
+        // INIT ON LOAD
+        window.onload = function() {
+            lucide.createIcons();
+            renderMenuItems(menuProducts);
+            renderBakeryShop();
+            updateCartDrawerUI();
+        };
+    </script>
+</body>
+</html>
