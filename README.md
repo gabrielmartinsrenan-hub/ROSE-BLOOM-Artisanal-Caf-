@@ -2,7 +2,7 @@
 cd rose-and-bloom-cafe
 2. Launch in BrowserDouble-click index.html or open it using your terminal:# macOS
 open index.html
-(https://mardomdecor.com/app/uploads/2023/03/CAFETERIA-6.jpeg)
+![Rose & Bloom Interior](https://mardomdecor.com/app/uploads/2023/03/CAFETERIA-6.jpeg)
 # Windows
 start index.html
 
